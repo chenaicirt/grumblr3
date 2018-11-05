@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+
+
+
+
+<div class = "post-panel" > 
+
+
+  <form method="post" enctype="multipart/form-data">
+  {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    {% if form2.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+{% if form.non_field_errors %}
+  <div class="non-field-errors">
+    {% for err in form.non_field_errors %}
+      <p class="form-error">{{ err }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+	{% csrf_token %}
+	{{form.as_p}}
+	{{form2.as_p}}
+	<button type = "submit">Submit </button>
+
+	</form> <br>
+
+	</div>
+
+
+{% endif %}
+{% endblock %}

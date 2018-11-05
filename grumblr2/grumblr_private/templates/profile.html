@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+
+
+<div class = "post-panel" >
+<h2>Profile at a Glance</h2>
+
+<div class = "profile-text"> 
+
+{% if user.userprofile.image %}
+    <img src="{{ user.userprofile.image.url }}" width = "200" height = "200">
+{% endif %}
+
+
+<p> <strong> Username: </strong> {{ user.username }} 
+ </p>
+ <p> <strong> Email: </strong> {{ user.email }} </p>
+
+<p> <strong>First Name: </strong> {{ user.first_name }} 
+  </p>
+<p> <strong> Last Name: </strong> {{ user.last_name }} 
+ </p>
+
+<p> <strong> Age: </strong> {{ user.userprofile.age }} 
+ </p>
+ <p> <strong> Bio: </strong> {{ user.userprofile.bio }} 
+ </p>
+
+ <a href="/grumblr-private/profile/edit"> update information </a> <br> 
+<a href="/grumblr-private/profile/change-password"> change password </a> <br>
+
+</div>
+
+</div>
+
+<br>
+
+</div>
+
+<br> 
+
+
+<div class = "post-panel" >
+<h2> {{user.username}}'s Past Posts</h2>
+</div>
+
+{% for post in posts %}
+
+{% if post.author.username == user.username %}
+
+  <div class = "post-panel" > 
+
+    <h4> {{post.title}} </h4> <br> 
+    {{post.body}}
+
+    <div class = "detail-text"> 
+    <small> written by: <a href="/grumblr-private/profile/{{post.author.username}}">  {% if user.userprofile.image %}
+    <img src="{{ user.userprofile.image.url }}" width = "30" height = "30">
+    {% endif %} {{post.author.username}} </a>  &nbsp &nbsp &nbsp &nbsp {{post.date_posted}} </small> 
+  
+    </div>
+    </div>
+  <br>
+
+{% endif %}
+  
+
+{% endfor %}
+
+
+
+{% endif %}
+{% endblock %}

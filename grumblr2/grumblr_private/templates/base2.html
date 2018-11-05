@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+<head>
+<title>Global/Home</title>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="{% static "/style.css" %}">
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="{% static 'twitter_bootstrap/js/transition.js' %}"></script>
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+<nav class="navbar2 navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'index' %}">Grumblr</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'login' %}">Log in</a></li>
+      <li><a href="{% url 'signup' %}">Sign up</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+        {% block content %}
+        {% endblock %}
+ 
+
+
+
+
+<div class="footer">
+    © 2018 Grumblr 
+    <p>Tricia Chen </p>
+</div>
+
+
+
+
+</body>
+</html>

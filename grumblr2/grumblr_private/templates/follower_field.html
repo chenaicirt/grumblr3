@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+
+    {% for follower in followers %}
+      {% for post in posts %}
+
+        {% if post.author.pk == follower.pk %}
+        <div class = "post-panel" > 
+
+    <h4> {{post.title}} </h4> <br> 
+         {{post.body}}
+
+    <div class = "detail-text"> 
+    <small> written by: <a href="/grumblr-private/profile/{{post.author.username}}">  {% if user.userprofile.image %}
+    <img src="{{ post.author.userprofile.image.url }}" width = "30" height = "30">
+    {% endif %} {{post.author.username}} </a>  &nbsp &nbsp &nbsp &nbsp {{post.date_posted}} </small> <br>
+
+    </div>
+    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+
+         <hr>
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <div class="date">{{ comment.created_date }}</div>
+                <strong>{{ comment.author }}</strong>
+                <p>{{ comment.text|linebreaks }}</p>
+            </div>
+        {% empty %}
+            <p>No comments here yet :(</p>
+        {% endfor %}
+
+    </div>
+  <br>
+
+{% endif %}
+
+
+      {% endfor %}
+
+    {% endfor %}
+
+
+{% endif %} 
+{% endblock %}

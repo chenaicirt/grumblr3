@@ -1,0 +1,47 @@
+<div id = "newPosts"> 
+
+{% for post in posts %}
+  <br>
+
+  <div class = "post-panel" > 
+
+    <h4> {{post.title}} </h4> <br> 
+    {{post.body}}
+
+    <div class = "detail-text"> 
+    <small> written by: <a href="/grumblr-private/profile/{{post.author.username}}">  {% if post.author.userprofile.image %}
+    <img src="{{ post.author.userprofile.image.url }}" width = "30" height = "30">
+    {% endif %} {{post.author.username}} </a>  &nbsp &nbsp &nbsp &nbsp {{post.date_posted}} </small> <br>
+
+    </div>
+     
+     {# action= "{% url 'add_comment_to_post' post.pk %}"  #}
+
+
+       <textarea class="form-control" rows="5" id = "{{post.pk}}" name="body"></textarea>
+
+      <button class="btn btn-default triggerSubmission" >Add Comment!</button>
+
+         <hr>
+      <div id="allComments{{post.pk}}">
+
+        {% for comment in post.comments.all %}
+                <div class="date">{{ comment.created_date }}</div>
+                <strong>{{ comment.author }}</strong>
+                <p>{{ comment.text| linebreaks }}</p>
+        {% empty %}
+            <p>No comments here yet</p>
+        {% endfor %}
+       </div>
+
+
+    </div>
+  <br>
+
+  
+
+{% endfor %}
+
+
+
+</div>
